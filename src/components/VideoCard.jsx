@@ -11,23 +11,7 @@
         const views=statistics?.viewCount
         console.log(views);
         
-        
-        
     
-    
-        
-        
-        // const{snippet}=info
-        // console.log(snippet,"thiss");
-        
-        // const{channelTitle,thumbnails}=snippet
-        // const{viewCount}=statistics
-    
-
-
-    
-        
-
     
     return (
         <div className='  shadow-lg  p-2 w-64'>
@@ -45,6 +29,18 @@
         </div>
         </div>
     )
+    }
+
+    export const AdVideoCard=({info})=>{
+        return(
+        <div className="border border-blue-500 relative">
+           
+            <VideoCard info={info} />
+            <h1 className='text-left'>ad</h1>
+        </div>
+
+        )
+
     }
 
     export default VideoCard
