@@ -1,16 +1,18 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid';
     const commentData=[
-        {name:"Rishwan",
+        {id:1,
+            name:"Rishwan",
          text:"Hello this is a good video",
          reply:[
-            {name:"Rishwan",
+            {
+                id:2,name:"Rishwan",
                 text:"Hello this is a good video",
                 reply:[
-                    {name:"Rishwan",
+                    {id:3,name:"Rishwan",
                         text:"Hello this is a good video",
                         reply:[
-                            {name:"Rishwan",
+                            {id:4,name:"Rishwan",
                                 text:"Hello this is a good video",
                                 reply:[
                                    
@@ -28,22 +30,22 @@ import { v4 as uuidv4 } from 'uuid';
 
          ]
         },
-        {name:"Rishwan",
+        {id:5,name:"Rishwan",
             text:"Hello this is a good video",
             reply:[
-                {name:"Rishwan",
+                {id:6,name:"Rishwan",
                     text:"Hello this is a good video",
                     reply:[
-                        {name:"Rishwan",
+                        {id:7,name:"Rishwan",
                             text:"Hello this is a good video",
                             reply:[
-                                {name:"Rishwan",
+                                {id:8,name:"Rishwan",
                                     text:"Hello this is a good video",
                                     reply:[
-                                        {name:"Rishwan",
+                                        {id:9,name:"Rishwan",
                                             text:"Hello this is a good video",
                                             reply:[
-                                                {name:"Rishwan",
+                                                {id:10,name:"Rishwan",
                                                     text:"Hello this is a good video",
                                                     reply:[
                                                        
@@ -69,27 +71,27 @@ import { v4 as uuidv4 } from 'uuid';
    
             ]
            },
-           {name:"Rishwan",
+           {id:11,name:"Rishwan",
             text:"Hello this is a good video",
             reply:[
                
    
             ]
            },
-           {name:"Rishwan",
+           {id:12,name:"Rishwan",
             text:"Hello this is a good video",
             reply:[
                
-                {name:"Rishwan",
+                {id:13,name:"Rishwan",
                     text:"Hello this is a good video",
                     reply:[
-                        {name:"Rishwan",
+                        {id:14,name:"Rishwan",
                             text:"Hello this is a good video",
                             reply:[
-                                {name:"Rishwan",
+                                {id:15,name:"Rishwan",
                                     text:"Hello this is a good video",
                                     reply:[
-                                        {name:"Rishwan",
+                                        {id:16,name:"Rishwan",
                                             text:"Hello this is a good video",
                                             reply:[
                                                
@@ -136,9 +138,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 
     const CommentList=({comments})=>{
-        return comments.map((comment,index)=> (
-        <div className="">
-            <Comment key={uuidv4()} data={comment} />
+        return comments.map((comment)=> (
+        <div className=""  key={comment.id}>
+            <Comment data={comment} />
             <div className=" border border-l-black ml-7">
                 <CommentList comments={comment.reply} />
             </div>
