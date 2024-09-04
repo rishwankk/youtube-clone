@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toggeleMenu } from '../utils/sideBarSlice'
 import { YOUTUBE_SEARCH_API } from '../utils/constants'
 import { cachedSearch } from '../utils/searchSlice'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
     const dispatch=useDispatch()
@@ -20,9 +21,10 @@ const Header = () => {
 useEffect(()=>{
  const timer=   setTimeout(() => {
     if(searchCache[searchQuery]){
-        setShowSuggestions(searchCache[searchQuery])
+        setSearchData(searchCache[searchQuery])
     }else{
         getSuggestion()
+      
 
     }
   }, 300);
@@ -37,11 +39,18 @@ const getSuggestion=async()=>{
     const data=await fetch(YOUTUBE_SEARCH_API+searchQuery)
     const result=await data.json()
     // console.log(result[1]);
-    setSearchData(result[1])
+    setSearchData(result[1]||[])
     dispatch(cachedSearch({
-        [searchQuery]:result[1]
+        [searchQuery]:result[1]||[]
     }))
     
+
+}
+const handleBlur = () => {
+    setTimeout(() => {
+        setShowSuggestions(false);
+    }, 200);
+
 
 }
 
@@ -53,12 +62,17 @@ const getSuggestion=async()=>{
             <img className='h-12 -m-1 mx-2 ' src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg" alt="logo" />
         </div>
         <div className="col-span-10  text-center ">
-            <input type="text" placeholder='Search  ' className='w-1/2 border border-gray-500 p-2 rounded-l-full '  value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} onBlur={()=>setShowSuggestions(false)} onFocus={()=>setShowSuggestions(true)} />
+            <input type="text" placeholder='Search  ' className='w-1/2 border border-gray-500 p-2 rounded-l-full '  value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} onBlur={handleBlur} onFocus={()=>setShowSuggestions(true)} />
             <button className='border border-gray-500 p-2 rounded-r-full bg-gray-300 hover:bg-gray-400'>🔍</button>
             {showSuggestions&& 
             <div className="bg-white  w-[28rem] ml-[12.5rem] rounded-lg shadow-md absolute">
                 <ul className='text-left '>
-                    {searchData.map((result)=> <li key={result} className='p-2 m-2 shadow-sm hover:bg-gray-200'>🔍 {result}</li>)}
+                {searchData.map((result) => (
+                            <Link to={`/search?v=${result}`} key={result}>
+                                <li className='p-2 m-2 shadow-sm hover:bg-gray-200'  onMouseDown={(e) => e.preventDefault()} >🔍 {result}</li>
+                            </Link>
+                        ))}
+
                    
                   
                 </ul>

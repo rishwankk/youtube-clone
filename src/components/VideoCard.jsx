@@ -9,7 +9,7 @@
         const title=snippet?.title
         const thumbnails=snippet?.thumbnails
         const views=statistics?.viewCount
-        console.log(views);
+    
         
     
     
