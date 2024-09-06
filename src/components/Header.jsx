@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
     const dispatch=useDispatch()
-    const [searchQuery,setSearchQuery]=useState([])
+    const [searchQuery,setSearchQuery]=useState("")
     const[searchData,setSearchData]=useState([])
     const searchCache=useSelector((store)=>store.search)
     const [showSuggestions,setShowSuggestions]=useState(true)
